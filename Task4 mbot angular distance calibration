@@ -85,4 +85,4 @@ void _loop() {
 
 void loop() {
   _loop();
-}This code is still very much in it's early stages, as I have not even attempted to use the turning feature on the bot.
+}This code is very basic and just consists of brainstorming because I have only tried forward motion once with the bot and never angular motion. I guess this will be very much like a tank and it can turn on a dime, or an area equal to a square with sides equal to the longest distance on the bot's proportions. I will try this all out on the bot on Friday.
