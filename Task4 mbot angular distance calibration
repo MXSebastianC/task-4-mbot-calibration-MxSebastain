@@ -6,9 +6,10 @@
 #include <SoftwareSerial.h>
 #include <MeAuriga.h>
 
+MeBuzzer buzzer;
+MeRGBLed rgbled_0(0, 12);
 MeEncoderOnBoard Encoder_1(SLOT1);
 MeEncoderOnBoard Encoder_2(SLOT2);
-MeTouchSensor touchSensor_6(6);
 MeLightSensor lightsensor_12(12);
 
 void isr_process_encoder1(void)
@@ -57,6 +58,9 @@ void _delay(float seconds) {
 }
 
 void setup() {
+  buzzer.setpin(45);
+  rgbled_0.setpin(44);
+  rgbled_0.fillPixelsBak(0, 2, 1);
   TCCR1A = _BV(WGM10);
   TCCR1B = _BV(CS11) | _BV(WGM12);
   TCCR2A = _BV(WGM21) | _BV(WGM20);
@@ -65,16 +69,53 @@ void setup() {
   attachInterrupt(Encoder_2.getIntNum(), isr_process_encoder2, RISING);
   randomSeed((unsigned long)(lightsensor_12.read() * 123456));
 
-  move(3, 50 / 100.0 * 255);
-  _delay(4);
-  move(3, 0);
-  if(touchSensor_6.touched()){
+  buzzer.tone(262, 0.5 * 1000);
+  _delay(0.02);
 
-      move(3, 50 / 100.0 * 255);
-      _delay(1);
-      move(3, 0);
+  rgbled_0.setColor(1,255,0,0);
+  rgbled_0.show();
+  _delay(0.5);
+  rgbled_0.setColor(1,0,0,0);
+  rgbled_0.show();
+
+  buzzer.tone(262, 0.5 * 1000);
+  _delay(0.02);
+
+  rgbled_0.setColor(1,255,0,0);
+  rgbled_0.show();
+  _delay(0.5);
+  rgbled_0.setColor(1,0,0,0);
+  rgbled_0.show();
+  while(!(random(1, 11 +1) == 11.000000))
+  {
+    _loop();
+
+    buzzer.tone(165, 0.25 * 1000);
+    _delay(0.02);
+
+    rgbled_0.setColor(1,255,246,0);
+    rgbled_0.show();
+    _delay(0.25);
+    rgbled_0.setColor(1,0,0,0);
+    rgbled_0.show();
 
   }
+
+  move(3, 50 / 100.0 * 255);
+  _delay(4.14);
+  move(3, 0);
+
+  buzzer.tone(659, 0.25 * 1000);
+  _delay(0.02);
+
+  buzzer.tone(659, 0.25 * 1000);
+  _delay(0.02);
+
+  rgbled_0.setColor(0,255,0,0);
+  rgbled_0.show();
+  _delay(1);
+  rgbled_0.setColor(0,0,0,0);
+  rgbled_0.show();
 
 }
 
@@ -85,4 +126,4 @@ void _loop() {
 
 void loop() {
   _loop();
-}This code is very basic and just consists of brainstorming because I have only tried forward motion once with the bot and never angular motion. I guess this will be very much like a tank and it can turn on a dime, or an area equal to a square with sides equal to the longest distance on the bot's proportions. I will try this all out on the bot on Friday.
+}
