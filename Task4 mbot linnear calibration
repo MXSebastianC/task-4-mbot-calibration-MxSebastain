@@ -155,24 +155,7 @@ void setup() {
       buzzer.tone(880, 0.75 * 1000);
       _delay(0.02);
   }
-  if(random(1, 5 +1) == 5.000000){
-
-      move(1, 50 / 100.0 * 255);
-      _delay(10);
-      move(1, 0);
-
-      Encoder_1.setTarPWM(-1 * 50/100.0*255);
-      Encoder_2.setTarPWM(60/100.0*255);
-      Encoder_1.setTarPWM(0);
-      Encoder_2.setTarPWM(0);
-      _delay(0.5);
-
-  }else{
-
-      rgbled_0.setColor(0,255,246,8);
-      rgbled_0.show();
-
-  }
+  _delay(1);
   while(!(random(1, 5 +1) == 5.000000))
   {
     _loop();
@@ -186,11 +169,8 @@ void setup() {
   rgbled_0.show();
 
   move(1, 50 / 100.0 * 255);
-  _delay(10);
+  _delay(11);
   move(1, 0);
-
-  Encoder_1.setTarPWM(-1 * 50/100.0*255);
-  Encoder_2.setTarPWM(60/100.0*255);
   Encoder_1.setTarPWM(0);
   Encoder_2.setTarPWM(0);
   _delay(0.5);
@@ -205,4 +185,3 @@ void _loop() {
 void loop() {
   _loop();
 }
-}This sequence has an initial light show that is mixed with a simple musical tune. then, there is a pause as the lights go red. The sequence which before the bot starts to move is inspired by the starts fo formula 1's races. the red light will shine for a short time and then, through random number generation the yellow lights can change to green (go) at any time, keeping everyone on their toes. I did have some trouble with the *if...else* code but I will sort that out and would appretiate suggestions. Also, the reason I have the left wheel turn at 10% more power is because my bot turned heavily to the right, and in a distance of two meters forward, it also went off to the right side by at least a foot!
